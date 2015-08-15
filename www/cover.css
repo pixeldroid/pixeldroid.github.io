@@ -1,0 +1,16 @@
+body {
+   background-color: rgb(128, 128, 128);
+   background-image: url("../img/Covers/amigo.gif");
+   background-repeat: no-repeat;
+   background-position: bottom left;
+   background-attachment: fixed;
+}
+img {
+   border-style: none;
+}
+#logo-box {
+   position: absolute;
+   left: 80%;
+   top: 80%;
+}
+

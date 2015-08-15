@@ -1,0 +1,71 @@
+#summary {
+	border: 2px solid rgb(118,118,118);
+	background-color: rgb(148,148,148);
+	padding: 0px 20px 10px 20px;
+	width: 60%;
+	margin-top: 50px;
+}
+
+#summary h2 {
+	color: rgb(148,148,148);
+	position: relative;
+	top: -.75em;
+	margin: 0px;
+}
+
+#summary h3 {
+	margin: 10px 0px 5px 0px;
+}
+
+#summary table {
+	margin-top: -.75em;
+}
+
+.droid {
+	font-size:larger;
+}
+
+img.figure {
+   border: 1px solid rgb(0,0,0);
+   height: auto;
+}
+
+
+/* HTML export of code from Notepad++ */
+.sc {
+	font-family: 'Lucida Console';
+	font-size: 10pt;
+	color: #80FFFF;
+	padding: .5em;
+}
+.sc0 {
+}
+.sc1 {
+	color: #C0C0C0;
+}
+.sc4 {
+	color: #FF8000;
+}
+.sc3 {
+	color: #C2CBD3;
+}
+.sc5 {
+	color: #AF07F8;
+}
+.sc6 {
+	color: #80FF00;
+}
+.sc10 {
+	font-weight: bold;
+	color: #00E8E8;
+}
+.sc11 {
+}
+.sc16 {
+	color: #6B34FE;
+}
+.sc17 {
+	font-weight: bold;
+	color: #C2CBD3;
+}
+

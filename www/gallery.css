@@ -1,0 +1,27 @@
+br.full {
+	clear: both;
+}
+
+#gallery {
+	position: relative;
+}
+
+#gallery img {
+	border-style:none;
+	width: 192px;
+	height: 192px;
+}
+
+#gallery a:hover, #gallery a:focus, #gallery a:active {
+	background-color:transparent;
+}
+
+.slide {
+	float: left;
+	margin: 15px;
+}
+
+.dimensions {
+	font-size: 80%;
+	color: rgb(38, 38, 38);
+}

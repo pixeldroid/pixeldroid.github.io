@@ -1,0 +1,179 @@
+
+/*
+   selectors
+*/
+
+a {
+   text-decoration: none;
+   font-style: italic;
+}
+a:link { color : rgb(238, 238, 238); }
+a:hover, a:focus, a:active {
+   color : rgb(255, 255, 255);
+   background-color : rgb(160, 140, 80);
+}
+a:visited { color : rgb(208, 208, 208); }
+
+body {
+   background-color: rgb(128, 128, 128);
+   font-size: 10pt;
+   font-family: "georgia", times, serif;
+   color : rgb(0, 0, 0);
+   margin: 0px;
+}
+
+code {
+   font-family: "lucida console", "ocr-a", monospace;
+   font-size: 85%;
+}
+
+h1 {
+   font-size: 150%;
+   margin-bottom: 20px;
+}
+
+h2, h3, h4 {
+   font-family: "lucida sans", trebuchet, tahoma, verdana, sans-serif;
+}
+
+h2 {
+   font-size: 125%;
+   line-height: 80%;
+   margin-top: 30px;
+}
+
+h3 {
+   font-size: 100%;
+   line-height: 80%;
+}
+
+h4 {
+   font-size: 80%;
+   font-style: oblique;
+   margin-top: -1.5em;
+}
+
+em {
+   font-style: oblique;
+}
+
+img {
+   border-style: none;
+}
+
+/*
+   classes
+*/
+
+.caption {
+   font-size: 85%;
+   font-style: oblique;
+}
+
+.clear {
+   clear: both;
+   line-height: 0;
+}
+
+/*
+   ids
+*/
+
+#static {
+   z-index: 1;
+   position: fixed;
+   left: 0px;
+   top: 0px;
+   width: 100%;
+}
+   
+   #header {
+      position: relative;
+      height: 90px;
+      background: url(titleBg.gif) repeat-x 0px 0px;
+      padding: 20px 0px 0px 30px;
+   }
+   
+      #logo, a.zip, a.src, a.ref, a.man, a.win, a.mac, a.doc {
+			display:block;
+         margin: 0px;
+         padding: 0px;
+         background: url(icons.png) no-repeat;
+      }
+      
+      #logo {
+         width: 64px;
+         height: 48px;
+      }
+      
+      a.zip, a.src, a.ref, a.man, a.win, a.mac, a.doc {
+         width: 16px;
+         height: 16px;
+         float: left;
+         margin-right: 4px;
+      }
+      
+      a.zip { background-position: -64px -0px; }
+      a.src { background-position: -80px -0px; }
+      a.ref { background-position: -96px -0px; }
+      a.man { background-position: -112px -0px; }
+      a.win { background-position: -64px -16px; }
+      a.mac { background-position: -80px -16px; }
+      a.doc { background-position: -96px -16px; }
+      
+      #title h1 {
+			text-indent: -9999px;
+			overflow: hidden;
+			position: absolute;
+			left: 120px;
+			top: 0px;
+         margin: 0px;
+         padding: 0px;
+			width: 650px;
+			height: 90px;
+         background: url(titles.png) no-repeat;
+      }
+      
+      #title #lib { background-position: 0px -0px; }
+      #title #img { background-position: 0px -90px; }
+      #title #pub { background-position: 0px -180px; }
+      #title #app { background-position: 0px -270px; }
+      #title #inf { background-position: 0px -360px; }
+      #title #now { background-position: 0px -450px; }
+      #title #man { background-position: 0px -540px; }
+
+
+#content {
+   position: absolute;
+   left: 150px;
+   top: 90px;
+   padding-right: 10px;
+   font-size: large;
+}
+#content p em {
+	font-style: normal;
+	font-weight: bold;
+	font-family: "lucida sans", trebuchet, tahoma, verdana, sans-serif;
+}
+#content #references {
+	border-top: 4px double rgb(48,48,48);
+	margin-top: 60px;
+	margin-bottom: 1000px;
+	font-size: smaller;
+	font-family: "lucida sans", trebuchet, tahoma, verdana, sans-serif;
+	color: rgb(48,48,48);
+}
+
+#references ul {
+	list-style: none;
+	padding-left: 0px;
+	text-indent: 0px;
+}
+
+#references ul.links {
+	padding-left: 1em;
+}
+
+#references a {
+	font-size: smaller;
+}

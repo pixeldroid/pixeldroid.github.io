@@ -1,0 +1,45 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+     
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+	<title>image view</title>
+   <link rel="STYLESHEET" type="text/css" href="../www/global.css" />
+   <script type="text/javascript">
+		function placeImage() {
+			var P = getParams();
+			if (P.title && (P.title.length > 1)) {
+				document.title = P.title;
+			}
+			if (P.image && (P.image.length > 1)) {
+				var body = document.getElementById("body"); 
+				body.style.backgroundImage ="url(" +P.image +")"; 
+				body.style.backgroundRepeat ="no-repeat"; 
+				body.style.backgroundPosition ="center"; 
+				body.style.backgroundAttachment ="fixed"; 
+			}
+		}
+		
+		function getParams() {
+			var wls = window.location.search;
+			var qs = (wls.length > 1) ? wls.substring(1, wls.length) : null;
+			var pairs = (qs) ? qs.split("&") : null;
+			var params = {};
+			
+			for (var i = 0; i < pairs.length; i++) {
+				var p = pairs[i].split("=");
+				params[p[0]] = unescape(p[1]);
+			}
+			
+			return params;
+		}
+   </script>
+</head>
+
+<body id="body" onload="void(placeImage());" />
+
+</html>

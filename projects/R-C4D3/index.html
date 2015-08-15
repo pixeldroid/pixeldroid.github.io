@@ -1,0 +1,185 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+	<title>pixeldroid model R-C4D3</title>
+	<link rel="STYLESHEET" type="text/css" href="../../www/global.css" />
+	<link rel="STYLESHEET" type="text/css" href="../../www/page.css" />
+	<link rel="STYLESHEET" type="text/css" href="../../www/gallery.css" />
+</head>
+
+<body>
+
+<div id="static">
+	<div id="header">
+	<a id="logo" href="../../today.html" title="return to topics"></a>
+	<div id="title"><h1 id="app">pixeldroids</h1></div>
+	</div>
+</div>
+
+<div id="content">
+<h1><span class="droid">R-C4D3</span>&mdash;flash game development middleware</h1>
+
+	<div id="summary">
+	<h2>summary</h2>
+		<table>
+		<tr><td colspan="2"><h3>Shell, Front End, ActionScript Library, Tools, and Example ROMs</h3></td></tr>
+		<tr>
+		<td align="center"><a class="src" href="http://code.google.com/p/r-c4d3/" title="download the source from google code"></a></td>
+		<td><a href="http://code.google.com/p/r-c4d3/" title="download the source from google code">R-C4D3 project at google code</a></td>
+		</tr>
+		<tr><td colspan="2"><h3>Table of Contents</h3></td></tr>
+		<tr>
+		<td align="center">&nbsp;</td>
+		<td><a href="#Overview" title="Overview">Overview</a></td>
+		</tr>
+		<tr>
+		<td align="center">&nbsp;</td>
+		<td><a href="#Shell-and-Front-End" title="Shell and Front End">Shell and Front End</a></td>
+		</tr>
+		<tr>
+		<td align="center">&nbsp;</td>
+		<td><a href="#References" title="References">References</a></td>
+		</tr>
+		<!--
+		<tr><td colspan="2"><h3>Cabinet, Joystick and Button Controls</h3></td></tr>
+		<tr>
+		<td align="center"><a class="man" href="roms/controltest_flash.zip" title="rom with source"></a></td>
+		<td><a href="cabinet.html" title="building an R-C4D3 cabinet from scratch">Project Journal</a></td>
+		</tr>
+		-->
+		</table>
+	</div>
+
+<a name="Overview">&nbsp;</a><br /><br /><br />
+<h2>Overview</h2>
+
+<p>
+R-C4D3 exists to provide a simple way for game developers to build, play and share their 
+own games. It has several components:
+</p>
+
+<ul>
+<li>The R-C4D3 shell, a desktop application (currently Windows only)</li>
+<li>A visual front end for browsing and selecting games and viewing stats</li>
+<li>A supporting library of ActionScript 3 code to provide a common interface for play controls across different deployment environments</li>
+<li>Tools to assist in developing, testing, debugging, and loading games</li>
+<li>Example game 'ROMs' that illustrate use of the system</li>
+</ul>
+
+<p>
+The full scope of the system supports the <a href="http://arcadecontrols.com/" title="Build Your Own Arcade Controls">BYOAC</a>-style 
+home arcade developer. It is designed to accomodate installation on a dedicated 
+arcade machine that translates joystick and button signals into keyboard events. 
+</p>
+
+<p>
+However, by programming to the common control interface, the same game SWF that works within the R-C4D3 shell 
+on a home arcade machine can also be deployed to the desktop or web and work with keyboard and mouse events directly, 
+simply by using a different loader (loaders provided as part of the tools package).
+</p>
+
+
+<a name="Shell-and-Front-End">&nbsp;</a><br /><br /><br />
+<h2>R-C4D3 Shell and Front End</h2>
+
+<p>
+The R-C4D3 shell is basically a full-screen web browser that when launched, loads a menu html page 
+specified in an <em>ini</em> file. Custom menus can be easily installed by editing 
+the ini file to point to a new html page.
+</p>
+
+<p>
+The default menu page provided with R-C4D3 displays a flash movie for browsing games and 
+their meta data (e.g. author, genre, rating, times launched), and for selecting a game to launch and play. 
+The menu retrieves a json listing of game ROM config files. Each config file contains 
+meta-data about the game, the location of the main game file, and a thumbnail for the game to be displayed in the menu.
+</p>
+
+<p>
+Games are self-contained in their own folder. Each game is hosted by an html container, 
+which means that really any web plug-in technology can be used for game development on the R-C4D3 system. 
+Due to the popularity of Flash, current efforts have focused on the ActionScript toolset, 
+but DHTML &amp; HTML Canvas, Java &amp; JavaFX, VRML &amp; X3d, Processing, and VirTools are examples of other technologies that provide web browser plugins.
+</p>
+
+
+<h3>Screenshots</h3>
+
+<div id="gallery">
+	<div class="slide">
+		<a href="../../img/imageView.html?title=Browse Games&image=../projects/R-C4D3/screenshots/browse.jpg">
+		<img src="screenshots/_browse.png" alt="Browse Games" />
+		</a><br />
+		<span class="caption">Browse Games</span>
+	</div>
+	
+	<div class="slide">
+		<a href="../../img/imageView.html?title=Game Info Screen&image=../projects/R-C4D3/screenshots/info.jpg">
+		<img src="screenshots/_info.png" alt="Game Info Screen" />
+		</a><br />
+		<span class="caption">Game Info Screen</span>
+	</div>
+	
+	<div class="slide">
+		<a href="../../img/imageView.html?title=Game Statistics Screen&image=../projects/R-C4D3/screenshots/stats.jpg">
+		<img src="screenshots/_stats.png" alt="Game Statistics Screen" />
+		</a><br />
+		<span class="caption">Game Statistics Screen</span>
+	</div>
+	
+	<div class="slide">
+		<a href="../../img/imageView.html?title=About Screen&image=../projects/R-C4D3/screenshots/about.jpg">
+		<img src="screenshots/_about.png" alt="About Screen" />
+		</a><br />
+		<span class="caption">About Screen</span>
+	</div>
+</div>
+<br class="full" />
+
+
+
+<a name="References">&nbsp;</a><br /><br /><br />
+<div id="references">
+<h2>References</h2>
+	<ul>
+	
+	<li>Related Links
+	<ul class="links">
+		<li><a class="ref" title="json"></a> JSON: <a href="http://www.json.org/">http://www.json.org/</a>
+		<li><a class="ref" title="mame"></a> MAME: <a href="http://www.mame.net/">http://www.mame.net/</a>
+		<li><a class="ref" title="byoac"></a> BYOAC: <a href="http://arcadecontrols.com/">http://arcadecontrols.com/</a>
+		<li><a class="ref" title="arcade@home"></a> Arcade@Home: <a href="http://www.arcadeathome.com/">http://www.arcadeathome.com/</a>
+		<li><a class="ref" title="ultimarc"></a> Ultimarc: <a href="http://www.ultimarc.com/">http://www.ultimarc.com/</a>
+	</ul>
+	</li>
+	
+	<li>Web Player Technologies
+	<ul class="links">
+		<li><a class="ref" title="flash"></a> Flash Player <a href="http://www.adobe.com/go/getflashplayer">http://www.adobe.com/go/getflashplayer</a></li>
+		<li><a class="ref" title="vrml"></a> VRML/X3D: <a href="http://www.web3d.org/">http://www.web3d.org/</a>
+			<ul class="links">
+			<li><a class="ref" title="contact"></a>contact <a href="http://www.bitmanagement.de/download/playerdownload.en.html">http://www.bitmanagement.de/download/playerdownload.en.html</a>
+			<li><a class="ref" title="cortona"></a>cortona <a href="http://www.parallelgraphics.com/products/cortona/">http://www.parallelgraphics.com/products/cortona/</a>
+			<li><a class="ref" title="octaga"></a>octaga <a href="http://www.octaga.com/download_octaga.html">http://www.octaga.com/download_octaga.html</a>
+			<li><a class="ref" title="vivaty"></a>vivaty <a href="http://www.vivaty.com/downloads/player">http://www.vivaty.com/downloads/player</a>
+			</ul></li>
+		<li><a class="ref" title="java"></a> Java: <a href="http://java.sun.com/">http://java.sun.com/</a></li>
+		<li><a class="ref" title="processing"></a> Processing: <a href="http://processing.org/">http://processing.org/</a></li>
+		<li><a class="ref" title="virtools"></a> VirTools: <a href="http://dl.3dvia.com/software/3dvia-player/">http://dl.3dvia.com/software/3dvia-player/</a></li>
+		<li><a class="ref" title="dhtml"></a> DHTML: <a href="http://www.google.com/search?q=dhtml+games">google results</a></li>
+		<li><a class="ref" title="html canvas"></a> HTML Canvas: <a href="https://developer.mozilla.org/en/A_Basic_RayCaster">examples at mozdev</a></li>
+	</ul>
+	</li>
+	
+	</ul>
+	</div>
+
+</div>
+
+</body>
+</html>

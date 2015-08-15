@@ -1,0 +1,210 @@
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+     
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+	<title>Quick Start Guide to Programming in ActionScript 3</title>
+   <link rel="STYLESHEET" type="text/css" href="../../www/global.css" />
+   <link rel="STYLESHEET" type="text/css" href="../../www/page.css" />
+</head>
+
+<body>
+
+<div id="static">
+   <div id="header">
+      <a id="logo" href="../../today.html" title="return to topics"></a>
+		<div id="title"><h1 id="inf">schematics</h1></div>
+   </div>
+</div>
+
+<div id="content">
+<h1>Quick Start Guide to Programming in ActionScript 3</h1>
+
+	<div id="summary">
+	<h2>summary</h2>
+		<table>
+		<tr><td colspan="2"><h3>Table of Contents</h3></td></tr>
+		<tr>
+		<td align="center">01</td>
+		<td><a href="#Download-the-Free-SDK" title="Download the Free SDK">Download the Free SDK</a></td>
+		</tr>
+		<tr>
+		<td align="center">02</td>
+		<td><a href="#Bookmark-the-Language-Reference" title="Bookmark the Language Reference">Bookmark the Language Reference</a></td>
+		</tr>
+		<tr>
+		<td align="center">03</td>
+		<td><a href="#Set-Up-Your-Favorite-Log-Viewer" title="Set Up Your Favorite Log Viewer and mm.cfg">Set Up Your Favorite Log Viewer and mm.cfg</a></td>
+		</tr>
+		<tr>
+		<td align="center">04</td>
+		<td><a href="#Write-Hello-World" title="Write Hello World">Write Hello World</a></td>
+		</tr>
+		<tr>
+		<td align="center">05</td>
+		<td><a href="#Compile-with-mxmlc-and-fcsh" title="Compile with mxmlc and fcsh">Compile with mxmlc and fcsh</a></td>
+		</tr>
+		<tr>
+		<td align="center">06</td>
+		<td><a href="#View-With-the-Debug-Player" title="View With the Debug Player">View With the Debug Player</a></td>
+		</tr>
+		<tr>
+		<td align="center">&nbsp;</td>
+		<td><a href="#References" title="References">References</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+<a name="Download-the-Free-SDK">&nbsp;</a><br /><br /><br />
+<h2>Download the Free SDK</h2>
+<p>
+Head over to <a href="http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK" title="Adobe Flex SDK">Adobe</a> 
+and grab whatever is current and stable. The build called 'Adobe Flex SDK' has the SDK and runtimes 
+all together in one download. There's no install to perform, just unzip the SDK wherever you'd like it to be. 
+Add the <tt>bin/</tt> folder to your path.
+</p>
+
+
+<a name="Bookmark-the-Language-Reference">&nbsp;</a><br /><br /><br />
+<h2>Bookmark the Language Reference</h2>
+<p>
+<a href="http://www.adobe.com/go/AS3LR" title="AS3LR">This</a> is the dictionary of native and extension classes provided by the runtime and SDK frameworks. 
+Unless you are interested in Flex or/and Air development, you can ignore everything that is not in 
+the <tt>flash.*</tt> package or top-level or global.
+</p>
+
+<p>
+You'll eventually want to memorize most of the reference and recite it to your pillow at night, 
+but for starters you should probably focus on <tt>Sprite</tt>, <tt>Shape</tt>, <tt>Bitmap</tt>, <tt>TextField</tt> and <tt>Loader</tt> and the classes they reference.
+</p>
+
+
+<a name="Set-Up-Your-Favorite-Log-Viewer">&nbsp;</a><br /><br /><br />
+<h2>Set Up Your Favorite Log Viewer and mm.cfg</h2>
+<p>
+<a href="http://code.google.com/p/flash-tracer/" title="Vizzy Flash Tracer">Vizzy</a> is recommended because it's free, simple, it works and it's cross-platform. 
+It also creates the <tt>mm.cfg</tt> file for you if you haven't already, which is nice.
+</p>
+
+
+<a name="Write-Hello-World">&nbsp;</a><br /><br /><br />
+<h2>Write Hello World</h2>
+<p>
+Your main class must extend <tt>Sprite</tt> or a subclass of Sprite, e.g. <tt>MovieClip</tt> or <tt>MySuperSpriteExtension</tt>. 
+Here's something simple that traces hello and your flash player version:
+</p>
+
+<div class="sc" style="float: left; white-space: pre; line-height: 1; background: #000040; "><span class="sc0"> 
+</span><span class="sc1">// mxmlc Main.as -output=hello.swf -default-size=800,600 -default-frame-rate=30 -default-background-color=0x00ff00</span><span class="sc0"> 
+</span> 
+<span class="sc11">package</span><span class="sc0"> 
+</span><span class="sc10">{</span><span class="sc0"> 
+    </span><span class="sc16">import</span><span class="sc0"> </span><span class="sc11">flash</span><span class="sc10">.</span><span class="sc11">display</span><span class="sc10">.</span><span class="sc11">Sprite</span><span class="sc10">;</span><span class="sc0"> 
+    </span><span class="sc16">import</span><span class="sc0"> </span><span class="sc11">flash</span><span class="sc10">.</span><span class="sc11">system</span><span class="sc10">.</span><span class="sc11">Capabilities</span><span class="sc10">;</span><span class="sc0"> 
+    
+    </span><span class="sc16">public</span><span class="sc0"> </span><span class="sc16">class</span><span class="sc0"> </span><span class="sc11">Main</span><span class="sc0"> </span><span class="sc16">extends</span><span class="sc0"> </span><span class="sc11">Sprite</span><span class="sc0"> 
+    </span><span class="sc10">{</span><span class="sc0"> 
+        </span><span class="sc16">public</span><span class="sc0"> </span><span class="sc5">function</span><span class="sc0"> </span><span class="sc11">Main</span><span class="sc10">()</span><span class="sc0"> 
+        </span><span class="sc10">{</span><span class="sc0"> 
+            </span><span class="sc16">super</span><span class="sc10">();</span><span class="sc0"> 
+            </span><span class="sc16">trace</span><span class="sc10">(</span><span class="sc6">"hello tracelog, i am version "</span><span class="sc0"> </span><span class="sc10">+</span><span class="sc11">Capabilities</span><span class="sc10">.</span><span class="sc11">version</span><span class="sc10">);</span><span class="sc0"> 
+        </span><span class="sc10">}</span><span class="sc0"> 
+    </span><span class="sc10">}</span><span class="sc0"> 
+    
+</span><span class="sc10">}</span> 
+</div><br style="clear:both;" />
+<tt>Main.as</tt><br />
+
+<a name="Compile-with-mxmlc-and-fcsh">&nbsp;</a><br /><br /><br />
+<h2>Compile with mxmlc and fcsh</h2>
+<p>
+With the SDK <tt>bin/</tt> folder in your path, you can open a command prompt, 
+change to the directory your saved <tt>Main.as</tt> into, and minimally type: 
+<code>mxmlc Main.as</code><br />
+This will compile <tt>Main.as</tt> to <tt>Main.swf</tt>. 
+</p>
+
+<p>
+Type: <code>mxmlc -help list advanced details</code> to see the full set of compiler options.<br />
+Typically you're interested in:
+</p>
+<ul>
+<li><tt>-output</tt></li>
+<li><tt>-default-size</tt></li>
+<li><tt>-default-frame-rate</tt></li>
+<li><tt>-default-background-color</tt></li>
+</ul>
+
+<h3>Flex Compiler Shell</h3>
+<p>
+Also in the <tt>bin/</tt> folder is an app called <tt>fcsh</tt>. You start it up and it stays 
+open and proxies calls to <tt>mxmlc</tt> for you so you don't have to incur the cost of the jvm 
+initializing up every time you compile with <tt>mxmlc</tt> or <tt>compc</tt>.
+</p>
+
+<p>
+For example: 
+<code>&gt; fcsh</code> starts up the shell<br />
+<code>(fcsh) mxmlc Main.as</code> caches a call to mxmlc and assigns an id number to it<br />
+<code>(fcsh) compile 1</code> requests the call cached as id 1 to be run again<br />
+</p>
+
+<p>
+Oddly, you type <tt>quit</tt> to exit the shell, not <tt>exit</tt>.
+</p>
+
+
+<a name="View-With-the-Debug-Player">&nbsp;</a><br /><br /><br />
+<h2>View With the Debug Player</h2>
+<p>
+Open your new swf with a debug version of the Flash player: either one installed in your web browser, 
+or a stand-alone app from the <tt>runtimes/player/</tt> SDK folder. Verify the player is a debug version by 
+right-clicking anywhere in the player window and looking for the word 'Debugger' in the context menu. 
+It doesn't matter if the word is greyed out.
+</p>
+
+<p>
+Trace calls are only written to log when you're running in a debug player <em>and</em> you have <tt>mm.cfg</tt> configured.
+</p>
+
+<p>
+The swf itself won't look like much since we didn't add anything graphical to the display list, but if all is set up well, 
+you should be able to open Vizzy or your log viewer of choice pointed at <tt>flashlog.txt</tt> and see our "hello tracelog" message.
+</p>
+
+<p>
+Next, try adding some things to <a href="http://edutechwiki.unige.ch/en/AS3_simple_examples" title="simple examples">look at</a>.
+</p>
+
+<br class="full" />
+
+
+
+<a name="References">&nbsp;</a><br /><br /><br />
+<div id="references">
+<h2>References</h2>
+	<ul>
+	
+	<li>Related Links
+	<ul class="links">
+		<li><a class="ref" title="free Flex SDK"></a> free Flex SDK: <a href="http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK">http://opensource.adobe.com/wiki/display/flexsdk/Flex+SDK</a>
+		<li><a class="ref" title="as3 language reference"></a> as3 language reference: <a href="http://www.adobe.com/go/AS3LR">http://www.adobe.com/go/AS3LR</a>
+		<li><a class="ref" title="Vizzy Flash Tracer"></a> Vizzy: <a href="http://code.google.com/p/flash-tracer/">http://code.google.com/p/flash-tracer/</a>
+		<li><a class="ref" title="mm.cfg specs"></a> mm.cfg: <a href="http://livedocs.adobe.com/flex/3/html/help.html?content=logging_04.html">http://livedocs.adobe.com/flex/3/html/help.html?content=logging_04.html</a>
+		<li><a class="ref" title="simple as3 examples"></a> simple as3 examples: <a href="http://edutechwiki.unige.ch/en/AS3_simple_examples">http://edutechwiki.unige.ch/en/AS3_simple_examples</a>
+		<li><a class="ref" title="senocular's beginner's guide"></a> beginner's guide to as3: <a href="http://www.senocular.com/flash/tutorials/as3withmxmlc/">http://www.senocular.com/flash/tutorials/as3withmxmlc/</a>
+		<li><a class="ref" title="as3 tips and tricks"></a> as3 tips and tricks: <a href="http://www.kirupa.com/forum/showthread.php?t=223798">http://www.kirupa.com/forum/showthread.php?t=223798</a>
+	</ul>
+	</li>
+
+	</div>
+</div>
+
+</body>
+</html>
+
