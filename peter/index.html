@@ -51,7 +51,6 @@ article {
   background: linear-gradient(90deg,var(--col-surface) 0,var(--col-surface) 35%,var(--col-background) 100%);
   border-radius: .3em;
   color: var(--col-on-surface-md);
-  overflow: hidden;
   padding: 1.5em;
   max-width: 700px;
 }
@@ -79,12 +78,33 @@ article h2 {
   font-size: 1em;
 }
 
-article img {
+article .crop {
+  border-radius: .3em;
   max-height: 20em;
-  /*max-width: 350px;*/
+  overflow: hidden;
+}
+
+article img {
   object-fit: cover;
   object-position: 0 0;
   width: 100%;
+}
+
+@media only screen and (min-width: 700px) {
+  article .zoom img {
+    transition: transform 1.5s ease;
+    transform-origin: center 33%;
+  }
+
+  article .zoom:hover img {
+    transition: transform 7s linear;
+    transform: translate(0, -20%) scale(115%, 115%);
+  }
+}
+
+@media (prefers-reduced-motion) {
+  article .zoom:hover img { transition: none; }
+  article .zoom img { transition: none; }
 }
 
 article label {
