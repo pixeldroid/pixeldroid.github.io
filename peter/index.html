@@ -24,7 +24,8 @@
   --col-on-background-hi: #404040;
   --col-primary: #119ade;
   --col-primary-hi: #4fc1fb;
-  --col-on-primary: #1c1f21;
+  --col-on-primary-lo: #1c1f21;
+  --col-on-primary-md: #334852;
   --col-secondary: #f2a365;
   --col-on-secondary: #292522;
 }
@@ -53,6 +54,10 @@ article {
   color: var(--col-on-surface-md);
   padding: 1.5em;
   max-width: 700px;
+}
+
+article:target {
+  background: linear-gradient(90deg,var(--col-on-primary-md) 0,var(--col-on-primary-md) 35%,var(--col-background) 100%);
 }
 
 h1, article cite {
@@ -229,7 +234,7 @@ sup {
 -->
 
 
-<li><article>
+<li><article id="hex-maze-generator">
   <h2>2023.08</h2>
   <cite><em>personal project</em> <i>|</i>
     maze generator for hexagonal tile systems
@@ -246,7 +251,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="pinwheel-system">
   <h2>2023.04</h2>
   <cite><em>open source</em> <i>|</i>
     pinwheel system
@@ -265,7 +270,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="segment-tiling">
   <h2>2022.07</h2>
   <cite><em>open source</em> <i>|</i>
     segment tiling
@@ -284,7 +289,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="silent-dog-tags">
   <h2>2022.05</h2>
   <cite><em>open source</em> <i>|</i>
     silent dog tags
@@ -301,7 +306,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="rougish">
   <h2>2022</h2>
   <cite><em>open source</em> <i>|</i>
     rougish <em>(work in progress)</em>
@@ -319,7 +324,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="cover3x3">
   <h2>2021.08</h2>
   <cite><em>open source</em> <i>|</i>
     cover 3x3
@@ -337,7 +342,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="huntington-mobile-app">
   <h2>present &larr; 2021</h2>
   <cite><em>Huntington National Bank</em> <i>|</i>
     mobile banking app
@@ -361,7 +366,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="vbstats">
   <h2>2021</h2>
   <cite><em>open source</em> <i>|</i>
     vb stats
@@ -380,7 +385,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="sun-clock">
   <h2>2020</h2>
   <cite><em>open source</em> <i>|</i>
     sun clock
@@ -399,7 +404,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="periodicity">
   <h2>2020.08</h2>
   <cite><em>open source</em> <i>|</i>
     periodicity
@@ -418,7 +423,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="sharing-with-fibonacci">
   <h2>2020.06</h2>
   <cite><em>open source</em> <i>|</i>
     sharing with fibonacci
@@ -437,7 +442,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="programming-pages">
   <h2>2020.02</h2>
   <cite><em>open source</em> <i>|</i>
     programming pages
@@ -456,7 +461,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="formulus">
   <h2>2019.10</h2>
   <cite><em>CAS</em> <i>|</i>
     Formulus
@@ -473,7 +478,7 @@ sup {
        src="cas/formulus.webp">
 </article></li>
 
-<li><article>
+<li><article id="patent-examination">
   <h2>2019.01</h2>
   <cite><em>CAS</em> <i>|</i>
     patent examination efficiency
@@ -485,7 +490,7 @@ sup {
   </p>
 </article></li>
 
-<li><article>
+<li><article id="scifinder">
   <h2>2017.11</h2>
   <cite><em>CAS</em> <i>|</i>
     SciFinder-n
@@ -502,7 +507,7 @@ sup {
        src="cas/scifinder-n.webp">
 </article></li>
 
-<li><article>
+<li><article id="spec-ls">
   <h2>2017</h2>
   <cite><em>open source</em> <i>|</i>
     spec-ls
@@ -520,7 +525,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="methodsnow">
   <h2>2016.02</h2>
   <cite><em>CAS</em> <i>|</i>
     Methods Now
@@ -537,7 +542,7 @@ sup {
        src="cas/methods-now.webp">
 </article></li>
 
-<li><article>
+<li><article id="botic-font">
   <h2>2016</h2>
   <cite><em>open source</em> <i>|</i>
     pixel font <em>botic</em>
@@ -555,7 +560,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="console-font">
   <h2>2016</h2>
   <cite><em>open source</em> <i>|</i>
     pixel font <em>console</em>
@@ -573,7 +578,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="menu-font">
   <h2>2016</h2>
   <cite><em>open source</em> <i>|</i>
     pixel font <em>menu</em>
@@ -591,7 +596,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="loomlibs">
   <h2>2016 &larr; 2014</h2>
   <cite><em>open source</em> <i>|</i>
     code libraries for the loomscript ecosystem
@@ -609,7 +614,7 @@ sup {
   </p>
 </article></li>
 
-<li><article>
+<li><article id="chase-mobile-app">
   <h2>2015 &larr; 2013</h2>
   <cite><em>Chase</em> <i>|</i>
     mobile banking app for iPhone
@@ -633,7 +638,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="loom-sdk">
   <h2>2014</h2>
   <cite><em>The Engine Company</em> <i>|</i>
     Loom Game Engine
@@ -649,7 +654,7 @@ sup {
        src="tec/loom-game-engine.webp">
 </article></li>
 
-<li><article>
+<li><article id="earthworks-builders">
   <h2>2012</h2>
   <cite><em>NEH</em> <i>|</i>
     Meet the Earthworks Builders
@@ -667,7 +672,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="bakery-shop">
   <h2>2011</h2>
   <cite><em>ACCAD, WOSU, OCEE</em> <i>|</i>
     The Bakery Shop
@@ -685,7 +690,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="video-game-prototyping">
   <h2>2010</h2>
   <cite><em>ACCAD</em> <i>|</i>
     graduate course: video game prototyping
@@ -702,7 +707,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="steelcase-microsite">
   <h2>2009.06</h2>
   <cite><em>Resource Interactive</em> <i>|</i>
     Steelcase: Come Together
@@ -722,7 +727,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="sherwin-color-inspiration">
   <h2>2009</h2>
   <cite><em>Resource Interactive</em> <i>|</i>
     Sherwin-Williams: Color of Inspiration
@@ -742,7 +747,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="sherwin-color-visualizer">
   <h2>2008</h2>
   <cite><em>Resource Interactive</em> <i>|</i>
     Sherwin-Williams: Color Visualizer Tool
@@ -764,7 +769,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="arcade-cabinet">
   <h2>2006</h2>
   <cite><em>ACCAD</em> <i>|</i>
     4-player arcade cabinet for video game production course
@@ -781,7 +786,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="video-game-production">
   <h2>2005 &rarr; 2011</h2>
   <cite><em>ACCAD</em> <i>|</i>
     graduate course: video game production
@@ -798,7 +803,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="raycaster-demo">
   <h2>2005</h2>
   <cite><em>open source</em> <i>|</i>
     raycaster demo in javascript
@@ -818,7 +823,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="growth-city">
   <h2>2004.04</h2>
   <cite><em>Blue Diesel</em> <i>|</i>
     Growth City CD-ROM for Genentech
@@ -835,7 +840,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="photo-mosaic">
   <h2>2003</h2>
   <cite><em>Blue Diesel</em> <i>|</i>
     photo mosaic software
@@ -852,7 +857,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="programming-concepts">
   <h2>2002 &rarr; 2010</h2>
   <cite><em>ACCAD</em> <i>|</i>
     graduate course: programming concepts for artists
@@ -869,7 +874,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="xigris-carousel">
   <h2>2002</h2>
   <cite><em>Blue Diesel</em> <i>|</i>
     Xigris carousel for Eli Lilly
@@ -889,7 +894,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="bestbuy-kiosks">
   <h2>2001</h2>
   <cite><em>Blue Diesel</em> <i>|</i>
     in-store kiosks for Best Buy
@@ -909,7 +914,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="thesis">
   <h2>2000</h2>
   <cite><em>ACCAD</em> <i>|</i>
     thesis: Building Games in VRML
@@ -926,7 +931,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="finger-spelling">
   <h2>1999.11</h2>
   <cite><em>ACCAD</em> <i>|</i>
     finger spelling tutor
@@ -945,7 +950,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="escher-vr">
   <h2>1999.03</h2>
   <cite><em>M.C. Escher's</em> <i>|</i>
      House of Stairs as a VR projection
@@ -963,7 +968,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="building-virtual-environments">
   <h2>1998 &rarr; 2005</h2>
   <cite><em>ACCAD</em> <i>|</i>
     graduate course: building virtual environments
@@ -980,7 +985,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="viewmaster-reel">
   <h2>1997</h2>
   <cite><em>ACCAD</em> <i>|</i>
     ViewMaster reel
@@ -997,7 +1002,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="stero-pair">
   <h2>1997</h2>
   <cite><em>ACCAD</em> <i>|</i>
     stereo pairs
@@ -1014,7 +1019,7 @@ sup {
   </figure>
 </article></li>
 
-<li><article>
+<li><article id="gamma-zine">
   <h2>1996</h2>
   <cite><em>GAMMA</em> <i>|</i>
     student interest group at OSU
