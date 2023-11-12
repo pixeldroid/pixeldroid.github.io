@@ -107,12 +107,29 @@ article figure {
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
+  position: relative;
 }
 
 article img {
+  display: block;
   object-fit: cover;
   object-position: 0 0;
   width: 100%;
+}
+
+figure a[target="_blank"]::after {
+  background-size: contain;
+  background-color: var(--col-surface-md);
+  border: var(--col-surface) solid 0.075em;
+  border-radius: 0.125em;
+  content: "\1f855";
+  display: inline-block;
+  height: 1em;
+  position: absolute;
+  right: 0.5em;
+  bottom: 0.5em;
+  vertical-align: text-bottom;
+  width: 1em;
 }
 
 @media only screen and (min-width: 700px) {
@@ -216,14 +233,11 @@ sup {
         loading="lazy"
         title="title of work"
        src="https://dummyimage.com/300x200/000/fff">
+    <a target="_blank" href="https://dummyimage.com/300x200/000/fff">full size image</a>
   </figure>
 </article></li>
 
 # lightbox (see more..)
-
-## icon
-- https://thenounproject.com/icon/more-239021/
-- https://thenounproject.com/icon/layers-3669949/
 
 ## impl
 - https://yossiabramov.com/blog/vanilla-js-lightbox
@@ -248,6 +262,7 @@ sup {
          loading="eager"
          title="hexagonal text maze"
          src="mga/36x21.webp">
+    <a target="_blank" href="mga/36x21.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -267,6 +282,7 @@ sup {
          loading="eager"
          title="pinwheel assembly"
          src="oss/pinwheel/assembly.webp">
+    <a target="_blank" href="oss/pinwheel/assembly.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -286,6 +302,7 @@ sup {
          loading="eager"
          title="tic-tac-toe"
          src="oss/ttt/games.webp">
+    <a target="_blank" href="oss/ttt/games.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -305,6 +322,7 @@ sup {
          loading="eager"
          title="segment tiling"
          src="oss/segments/tiling.webp">
+    <a target="_blank" href="oss/segments/tiling.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -322,6 +340,7 @@ sup {
          loading="eager"
          title="silent dog tags"
          src="oss/dogtags/sample.webp">
+    <a target="_blank" href="oss/dogtags/sample.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -340,6 +359,7 @@ sup {
          loading="eager"
          title="rougish"
          src="oss/rougish/level1.webp">
+    <a target="_blank" href="oss/rougish/level1.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -358,6 +378,7 @@ sup {
          loading="lazy"
          title="cover 3x3"
          src="oss/cover/3x3.webp">
+    <a target="_blank" href="oss/cover/3x3.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -382,6 +403,7 @@ sup {
          loading="lazy"
          title="Huntington mobile app, circa 2022"
          src="hnb/hnb-mobile-app.webp">
+    <a target="_blank" href="hnb/hnb-mobile-app.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -401,6 +423,7 @@ sup {
          loading="lazy"
          title="vb stats"
          src="oss/vbstats/02-recording.webp">
+    <a target="_blank" href="oss/vbstats/02-recording.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -420,6 +443,7 @@ sup {
          loading="lazy"
          title="sun clock"
          src="oss/sun/clock.webp">
+    <a target="_blank" href="oss/sun/clock.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -439,6 +463,7 @@ sup {
          loading="lazy"
          title="periodicity"
          src="oss/periodicity/waveforms.webp">
+    <a target="_blank" href="oss/periodicity/waveforms.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -458,6 +483,7 @@ sup {
          loading="lazy"
          title="sharing with fibonacci"
          src="oss/fibonacci/sharing.webp">
+    <a target="_blank" href="oss/fibonacci/sharing.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -477,6 +503,7 @@ sup {
          loading="lazy"
          title="programming pages Jekyll theme"
          src="oss/pages/programming-pages.webp">
+    <a target="_blank" href="oss/pages/programming-pages.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -541,6 +568,7 @@ sup {
          loading="lazy"
          title="spec-ls running in the terminal"
          src="oss/spec/terminal.webp">
+    <a target="_blank" href="oss/spec/terminal.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -576,6 +604,7 @@ sup {
          loading="lazy"
          title="botic font"
          src="oss/botic/specimen.webp">
+    <a target="_blank" href="oss/botic/specimen.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -594,6 +623,7 @@ sup {
          loading="lazy"
          title="console font"
          src="oss/console/specimen.webp">
+    <a target="_blank" href="oss/console/specimen.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -612,6 +642,7 @@ sup {
          loading="lazy"
          title="menu font"
          src="oss/menu/specimen.webp">
+    <a target="_blank" href="oss/menu/specimen.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -654,6 +685,7 @@ sup {
          loading="lazy"
          title="Chase mobile app for iPhone, circa 2015"
          src="chase/mobile-banking-iphone.webp">
+    <a target="_blank" href="chase/mobile-banking-iphone.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -688,6 +720,7 @@ sup {
          loading="lazy"
          title="3D environment to explore moon cycles over the Newark earthworks"
          src="grants/earthworks/earthworks-builders_2.webp">
+    <a target="_blank" href="grants/earthworks/earthworks-builders_2.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -707,6 +740,7 @@ sup {
          loading="lazy"
          title="the Bakery Shop"
          src="grants/bakery/bakery-shop_3.webp">
+    <a target="_blank" href="grants/bakery/bakery-shop_3.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -724,6 +758,7 @@ sup {
          loading="lazy"
          title="video game prototyping"
          src="accad/pla/screenshots.webp">
+    <a target="_blank" href="accad/pla/screenshots.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -744,6 +779,7 @@ sup {
          loading="lazy"
          title="Steelcase: Come Together"
          src="ri/steelcase_come-together_1.webp">
+    <a target="_blank" href="ri/steelcase_come-together_1.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -764,6 +800,7 @@ sup {
          loading="lazy"
          title="Sherwin-Williams: Color of Inspiration"
          src="ri/sherwin-williams_color-of-inspiration.webp">
+    <a target="_blank" href="ri/sherwin-williams_color-of-inspiration.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -786,6 +823,7 @@ sup {
          loading="lazy"
          title="Sherwin-Williams: Color Visualizer Tool"
          src="ri/sherwin-williams_color-visualizer_1.webp">
+    <a target="_blank" href="ri/sherwin-williams_color-visualizer_1.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -804,6 +842,7 @@ sup {
          loading="lazy"
          title="4-player arcade cabinet"
          src="accad/rcade/cabinet.webp">
+    <a target="_blank" href="accad/rcade/cabinet.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -821,6 +860,7 @@ sup {
          loading="lazy"
          title="video game production"
          src="accad/gmz/homepage.webp">
+    <a target="_blank" href="accad/gmz/homepage.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -841,6 +881,7 @@ sup {
          loading="lazy"
          title="javascript raycaster"
          src="oss/ray/caster.webp">
+    <a target="_blank" href="oss/ray/caster.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -858,6 +899,7 @@ sup {
          loading="lazy"
          title="Growth City"
          src="bd/growthcity/map.webp">
+    <a target="_blank" href="bd/growthcity/map.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -875,6 +917,7 @@ sup {
          loading="lazy"
          title="robot"
          src="bd/mosaic/robot.webp">
+    <a target="_blank" href="bd/mosaic/robot.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -892,6 +935,7 @@ sup {
          loading="lazy"
          title="programming concepts for artists"
          src="accad/pca/homepage.webp">
+    <a target="_blank" href="accad/pca/homepage.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -912,6 +956,7 @@ sup {
          loading="lazy"
          title="Xigris carousel booth"
          src="bd/xigris/csca2002.webp">
+    <a target="_blank" href="bd/xigris/csca2002.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -932,6 +977,7 @@ sup {
          loading="lazy"
          title="Best Buy kiosk series + videos"
          src="bd/bestbuy/csca2001.webp">
+    <a target="_blank" href="bd/bestbuy/csca2001.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -950,6 +996,7 @@ sup {
          loading="lazy"
          title="Building Games in VRML"
          src="accad/thesis/p01.webp">
+    <a target="_blank" href="accad/thesis/p01.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -969,6 +1016,7 @@ sup {
          loading="lazy"
          title="finger spelling tutor"
          src="accad/asl/finger-spelling.webp">
+    <a target="_blank" href="accad/asl/finger-spelling.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -987,6 +1035,7 @@ sup {
          loading="lazy"
          title="House of Stairs as a VR projection"
          src="oss/escher/house-of-stairs.webp">
+    <a target="_blank" href="oss/escher/house-of-stairs.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -1004,6 +1053,7 @@ sup {
          loading="lazy"
          title="building virtual environments"
          src="accad/vnv/homepage.webp">
+    <a target="_blank" href="accad/vnv/homepage.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -1021,6 +1071,7 @@ sup {
          loading="lazy"
          title="Trouble in the Tub, View-Master reel"
          src="accad/bathbot/reel.webp">
+    <a target="_blank" href="accad/bathbot/reel.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -1038,6 +1089,7 @@ sup {
          loading="lazy"
          title="Trouble in the Tub, stereo pair"
          src="accad/bathbot/stereo.webp">
+    <a target="_blank" href="accad/bathbot/stereo.webp">full size image</a>
   </figure>
 </article></li>
 
@@ -1055,6 +1107,7 @@ sup {
          loading="lazy"
          title="GAMMA VOL 01 NO. 03"
          src="gamma/vol01-no03.webp">
+    <a target="_blank" href="gamma/vol01-no03.webp">full size image</a>
   </figure>
 </article></li>
 
