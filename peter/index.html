@@ -13,6 +13,353 @@
   gtag('config', 'UA-178012709-1');
 </script>
 <style>
+  /* Bigger Picture lightbox
+     https://github.com/henrygd/bigger-picture/tree/main/dist
+  */
+  @keyframes bp-fadein {
+    from {
+      opacity: 0.01;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes bp-bar {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  @keyframes bp-o {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  .bp-wrap {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    /* If you're mounting on a portion of the screen and need visible
+    overflow on .bp-wrap, change contain to "layout" on that instance */
+    contain: strict;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .bp-wrap > div:first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    animation: bp-fadein 0.48s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  .bp-vid audio {
+    position: absolute;
+    left: 14px;
+    width: calc(100% - 28px);
+    bottom: 14px;
+    height: 50px;
+  }
+
+  .bp-inner {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+  }
+
+  .bp-html {
+    display: contents;
+  }
+  .bp-html > :first-child {
+    margin: auto;
+  }
+
+  .bp-img-wrap {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    contain: strict;
+  }
+  .bp-img-wrap .bp-canzoom {
+    cursor: zoom-in;
+  }
+  .bp-img-wrap .bp-drag {
+    cursor: grabbing;
+  }
+
+  .bp-close {
+    contain: layout size;
+  }
+
+  .bp-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    user-select: none;
+    background-size: 100% 100%;
+  }
+  .bp-img img,
+  .bp-img div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .bp-img .bp-o {
+    display: none;
+  }
+
+  .bp-zoomed .bp-img:not(.bp-drag) {
+    cursor: grab;
+  }
+  .bp-zoomed .bp-cap {
+    opacity: 0;
+    animation: none !important;
+  }
+
+  .bp-zoomed.bp-small .bp-controls {
+    opacity: 0;
+  }
+  .bp-zoomed.bp-small .bp-controls button {
+    pointer-events: none;
+  }
+
+  .bp-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    text-align: left;
+    transition: opacity 0.3s;
+    animation: bp-fadein 0.3s;
+  }
+  .bp-controls button {
+    pointer-events: auto;
+    cursor: pointer;
+    position: absolute;
+    border: 0;
+    background: rgba(0, 0, 0, 0.15);
+    opacity: 0.9;
+    transition: all 0.1s;
+    contain: content;
+  }
+  .bp-controls button:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 1;
+  }
+  .bp-controls svg {
+    fill: #fff;
+  }
+
+  .bp-count {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1;
+    margin: 16px;
+    height: 50px;
+    width: 100px;
+  }
+
+  .bp-prev,
+  .bp-next {
+    top: 50%;
+    right: 0;
+    margin-top: -32px;
+    height: 64px;
+    width: 58px;
+    border-radius: 3px 0 0 3px;
+  }
+  .bp-prev:hover:before,
+  .bp-next:hover:before {
+    transform: translateX(-2px);
+  }
+  .bp-prev:before,
+  .bp-next:before {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'%3E%3Cpath d='M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z'/%3E%3C/svg%3E");
+    position: absolute;
+    left: 7px;
+    top: 9px;
+    width: 46px;
+    transition: all 0.2s;
+  }
+
+  .bp-prev {
+    right: auto;
+    left: 0;
+    transform: scalex(-1);
+  }
+
+  .bp-x {
+    top: 0;
+    right: 0;
+    height: 55px;
+    width: 58px;
+    border-radius: 0 0 0 3px;
+  }
+  .bp-x:before {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='%23fff'%3E%3Cpath d='M24 10l-2-2-6 6-6-6-2 2 6 6-6 6 2 2 6-6 6 6 2-2-6-6z'/%3E%3C/svg%3E");
+    position: absolute;
+    width: 37px;
+    top: 8px;
+    right: 10px;
+  }
+
+  .bp-if,
+  .bp-vid {
+    position: relative;
+    margin: auto;
+    background: #000;
+    background-size: 100% 100%;
+  }
+  .bp-if iframe,
+  .bp-if video,
+  .bp-if div,
+  .bp-vid iframe,
+  .bp-vid video,
+  .bp-vid div {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border: 0;
+  }
+
+  .bp-load {
+    display: flex;
+    background-size: 100% 100%;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .bp-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    transform: translateX(-100%);
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 0 3px 3px 0;
+    animation: bp-bar 4s both;
+  }
+
+  .bp-o,
+  .bp-o:after {
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+  }
+
+  .bp-o {
+    margin: auto;
+    border: 10px solid rgba(255, 255, 255, 0.2);
+    border-left-color: rgba(255, 255, 255, 0.9);
+    animation: bp-o 1s infinite linear;
+  }
+
+  .bp-cap {
+    position: absolute;
+    bottom: 2%;
+    background: rgba(9, 9, 9, 0.8);
+    color: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+    max-width: 95%;
+    line-height: 1.3;
+    padding: 0.6em 1.2em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    width: -moz-fit-content;
+    display: table;
+    transition: opacity 0.3s;
+    animation: bp-fadein 0.2s;
+  }
+  .bp-cap a {
+    color: inherit;
+  }
+
+  .bp-inline {
+    position: absolute;
+  }
+
+  .bp-lock {
+    overflow-y: hidden;
+  }
+  .bp-lock body {
+    overflow: scroll;
+  }
+
+  .bp-noclose .bp-x {
+    display: none;
+  }
+  .bp-noclose:not(.bp-zoomed) {
+    touch-action: pan-y;
+  }
+  .bp-noclose:not(.bp-zoomed) .bp-img-wrap {
+    cursor: zoom-in;
+  }
+
+  @media (prefers-reduced-motion) {
+    .bp-wrap * {
+      animation-duration: 0s !important;
+    }
+  }
+  @media (max-width: 500px) {
+    .bp-x {
+      height: 47px;
+      width: 47px;
+    }
+    .bp-x:before {
+      width: 34px;
+      top: 6px;
+      right: 6px;
+    }
+
+    .bp-prev,
+  .bp-next {
+      margin-top: -27px;
+      height: 54px;
+      width: 45px;
+    }
+    .bp-prev:before,
+  .bp-next:before {
+      top: 7px;
+      left: 2px;
+      width: 43px;
+    }
+
+    .bp-o,
+  .bp-o:after {
+      border-width: 6px;
+      width: 60px;
+      height: 60px;
+    }
+
+    .bp-count {
+      margin: 12px 10px;
+    }
+  }
+</style>
+<style>
 :root {
   --col-surface: #403f3e;
   --col-surface-md: #505050;
@@ -196,6 +543,15 @@ sup {
   font-size: 0.5em;
 }
 
+.bp-cap, .bp-count {
+  font-family: Tahoma,Geneva,sans-serif;
+}
+
+.hide {
+  display: none;
+  &:focus { display: block; }
+}
+
 .numeric {
   font-family: Georgia,serif;
   color: var(--col-on-surface-hi);
@@ -219,6 +575,8 @@ sup {
 </article></li>
 
 <!--
+https://kangax.github.io/html-minifier/
+
 <li><article id="article-title">
   <h2>yyyy.mm</h2>
   <cite><em>category tag</em> <i>|</i>
@@ -237,15 +595,6 @@ sup {
     <a target="_blank" title="open source in new tab" href="https://dummyimage.com/300x200/000/fff"></a>
   </figure>
 </article></li>
-
-# lightbox (see more..)
-
-## impl
-- https://yossiabramov.com/blog/vanilla-js-lightbox
-- https://dbrekalo.github.io/simpleLightbox/
-- https://basiclightbox.electerious.com/
-- https://github.com/andreknieriem/simplelightbox
-
 -->
 
 
@@ -276,7 +625,6 @@ sup {
   <p>
     <mark>designed a parametric pinwheel model for 3D printing,</mark>
     using OpenSCAD for procedural modeling.
-    <a class="more" href="https://github.com/ellemenno/pinwheel-system">more &raquo;</a>
   </p>
   <figure class="crop zoom">
     <img alt="assembly diagram for a pinwheel"
@@ -296,7 +644,6 @@ sup {
   <p>
     <mark>programmed a multi-player version of tic-tac-toe that supports various board sizes,</mark>
     using Java and a Terminal User Interface (TUI).
-    <a class="more" href="https://github.com/ellemenno/j-TTT">more &raquo;</a>
   </p>
   <figure class="crop zoom">
     <img alt="screenshots of different games of tic-tac-toe running in a terminal"
@@ -316,7 +663,6 @@ sup {
   <p>
     <mark>reconstructed a wallpaper pattern as a procedural image generator,</mark>
     using SVG and the Observable platform to illustrate the technical analysis.
-    <a class="more" href="https://observablehq.com/@ellemenno/segment-tiling">more &raquo;</a>
   </p>
   <figure class="crop">
     <img alt="image comprising small tiles of horizontal, vertical, and diagonal lines"
@@ -329,7 +675,7 @@ sup {
 
 <li><article id="silent-dog-tags">
   <h2>2022.05</h2>
-  <cite><em>open source</em> <i>|</i>
+  <cite><em>personal project</em> <i>|</i>
     silent dog tags
   </cite>
   <p>
@@ -417,7 +763,7 @@ sup {
   <p>
     <mark>developed a web app to record volleyball statistics,</mark>
     with a streamlined UX to allow real-time recording, stats review, and import/export.
-    <a class="more" href="https://ellemenno.github.io/vbstats">more &raquo;</a>
+    <a class="more" href="#" data-html="lb-vbstats">more &plus;</a>
   </p>
   <figure class="crop zoom">
     <img alt="screenshot of the vb stats app being used to record rallies during a set"
@@ -425,6 +771,32 @@ sup {
          title="vb stats"
          src="oss/vbstats/02-recording.webp">
     <a target="_blank" title="open source in new tab" href="oss/vbstats/02-recording.webp"></a>
+    <div id="lb-vbstats" class="hide">
+      <a data-thumb="blank.png"
+         data-img="oss/vbstats/01-new-game.webp"
+         data-alt="setting up to record a new game with VBStats"
+         data-width="1110"
+         data-height="943"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="oss/vbstats/02-recording.webp"
+         data-alt="recording rallies during a set with VBStats"
+         data-width="1110"
+         data-height="943"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="oss/vbstats/03-stats.webp"
+         data-alt="reviewing game stats in VBStats"
+         data-width="1110"
+         data-height="943"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="oss/vbstats/04-serialization.webp"
+         data-alt="exporting game data with VBStats"
+         data-width="1110"
+         data-height="943"
+      ></a>
+    </div>
   </figure>
 </article></li>
 
@@ -437,7 +809,7 @@ sup {
   <p>
     <mark>created a real-time visualization of sun and sky,</mark>
     to show rise, set, twilight and noon based on a given latitude and longtitude.
-    <a class="more" href="https://observablehq.com/@ellemenno/sun-clock">more &raquo;</a>
+    <a class="more" href="#" data-html="lb-sun-clock">more &plus;</a>
   </p>
   <figure class="crop zoom">
     <img alt="screenshot of the sun clock visualization showing the sun approaching noon above the horizon, twilights at approximately 8:30pm and 6:30am"
@@ -445,6 +817,14 @@ sup {
          title="sun clock"
          src="oss/sun/clock.webp">
     <a target="_blank" title="open source in new tab" href="oss/sun/clock.webp"></a>
+    <div id="lb-sun-clock" class="hide">
+      <a data-thumb="blank.png"
+         data-img="oss/sun/world-sky.webp"
+         data-alt="sun clocks at various latitudes and longtitudes"
+         data-width="3166"
+         data-height="3166"
+      ></a>
+    </div>
   </figure>
 </article></li>
 
@@ -457,7 +837,6 @@ sup {
   <p>
     <mark>constructed a visual, animated, interactive exploration of signal waveforms,</mark>
     using the Observable platform for thinking and showing.
-    <a class="more" href="https://observablehq.com/@ellemenno/periodicity">more &raquo;</a>
   </p>
   <figure class="crop zoom">
     <img alt="screenshot of an article about signal waveforms entitled 'periodicity'"
@@ -477,7 +856,6 @@ sup {
   <p>
     <mark>developed a small thought experiment to explore computational thinking with the Observable platform, </mark>
     applying the Fibonacci sequence to start-up equity stakes.
-    <a class="more" href="https://observablehq.com/@ellemenno/sharing-with-fibonacci">more &raquo;</a>
   </p>
   <figure class="crop zoom">
     <img alt="screenshot of an article about the Fibonacci sequence entitled 'sharing with fibonacci'"
@@ -492,12 +870,12 @@ sup {
   <h2>2020.02</h2>
   <cite><em>open source</em> <i>|</i>
     programming pages
-    <br><small><a href="https://rubygems.org/gems/programming-pages">https://rubygems.org/gems/programming-pages</a></small>
+    <br><small><a href="https://pixeldroid.github.io/programming-pages/">https://pixeldroid.github.io/programming-pages/</a></small>
   </cite>
   <p>
     <mark>simplified the process to deliver readable, searchable, hierarchical documentation.</mark>
     Designed and released a Jekyll theme leveraging composable layouts and markdown for simple authoring, GitHub Pages for simple publishing.
-    <a class="more" href="https://pixeldroid.github.io/programming-pages/">more &raquo;</a>
+    <a class="more" href="https://rubygems.org/gems/programming-pages">install &raquo;</a>
   </p>
   <figure class="crop zoom">
     <img alt="screenshot of the programming pages theme documenting itself"
@@ -594,11 +972,11 @@ sup {
   <h2>2016</h2>
   <cite><em>open source</em> <i>|</i>
     pixel font <em>botic</em>
-    <br><small><a href="https://github.com/pixeldroid/fonts/tree/main/botic">https://github.com/pixeldroid/fonts#botic</a></small>
+    <br><small><a href="https://github.com/pixeldroid/fonts/tree/main/botic">https://github.com/pixeldroid/fonts/tree/main/botic</a></small>
   </cite>
   <p>
     <mark><em>botic</em>, digital magnetic ink for cashing checks against the future.</mark>
-    <a class="more" href="https://github.com/pixeldroid/fonts/tree/main/botic">more &raquo;</a>
+    <a class="more" href="https://github.com/pixeldroid/fonts/releases/tag/botic-v1.0.0">download &raquo;</a>
   </p>
   <figure class="crop zoom">
     <img alt="font specimen for botic, by pixeldroid"
@@ -613,11 +991,11 @@ sup {
   <h2>2016</h2>
   <cite><em>open source</em> <i>|</i>
     pixel font <em>console</em>
-    <br><small><a href="https://github.com/pixeldroid/fonts/tree/main/console">https://github.com/pixeldroid/fonts#console</a></small>
+    <br><small><a href="https://github.com/pixeldroid/fonts/tree/main/console">https://github.com/pixeldroid/fonts/tree/main/console</a></small>
   </cite>
   <p>
     <mark><em>console</em>, a tiny pixel font that is small but clear, with 5 pixel uppercase and 4 pixel lowercase letters.</mark>
-    <a class="more" href="https://github.com/pixeldroid/fonts/tree/main/console">more &raquo;</a>
+    <a class="more" href="https://github.com/pixeldroid/fonts/releases/tag/console-v1.0.1">download &raquo;</a>
   </p>
   <figure class="crop zoom">
     <img alt="font specimen for console, by pixeldroid"
@@ -632,11 +1010,11 @@ sup {
   <h2>2016</h2>
   <cite><em>open source</em> <i>|</i>
     pixel font <em>menu</em>
-    <br><small><a href="https://github.com/pixeldroid/fonts/tree/main/menu">https://github.com/pixeldroid/fonts#menu</a></small>
+    <br><small><a href="https://github.com/pixeldroid/fonts/tree/main/menu">https://github.com/pixeldroid/fonts/tree/main/menu</a></small>
   </cite>
   <p>
     <mark><em>menu</em>, a pixel font ready to report high scores, warn of grues, or tell the player to check in another castle.</mark>
-    <a class="more" href="https://github.com/pixeldroid/fonts/tree/main/menu">more &raquo;</a>
+    <a class="more" href="https://github.com/pixeldroid/fonts/releases/tag/menu-v1.0.2">download &raquo;</a>
   </p>
   <figure class="crop zoom">
     <img alt="font specimen for menu, by pixeldroid"
@@ -713,11 +1091,12 @@ sup {
   <h2>2012</h2>
   <cite><em>NEH</em> <i>|</i>
     Meet the Earthworks Builders
-    <br><small><a href="https://earthworksbuilder.wordpress.com/">https://earthworksbuilder.wordpress.com/</a></small>
   </cite>
   <p>
     <mark>consulted on a grant-funded project to visualize the relationship of the <a href="https://hopewellearthworks.org/site/octagon-earthworks/">Hopewell Octagon Earthworks</a> to cycles of the moon.</mark>
     Developed a 3D virtual environment to allow users to explore the space and positions of the moon from a first-person perspective.
+    <a class="more" href="#" data-html="lb-earthworks-builders">more &plus;</a>
+    <a class="more" href="https://earthworksbuilder.wordpress.com/">visit &raquo;</a>
   </p>
   <figure class="crop zoom">
     <img alt="screenshot of Meet the Earthworks Builders game"
@@ -725,6 +1104,20 @@ sup {
          title="3D environment to explore moon cycles over the Hopewell Octagon Earthworks in Newark, Ohio"
          src="grants/earthworks/earthworks-builders_2.webp">
     <a target="_blank" title="open source in new tab" href="grants/earthworks/earthworks-builders_2.webp"></a>
+    <div id="lb-earthworks-builders" class="hide">
+      <a data-thumb="blank.png"
+         data-img="grants/earthworks/earthworks-builders_1.webp"
+         data-alt="path of the moon over the Octagon Earthworks"
+         data-width="1000"
+         data-height="853"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="grants/earthworks/earthworks-builders_3.webp"
+         data-alt="visiting the Octagon Earthworks"
+         data-width="576"
+         data-height="130"
+      ></a>
+    </div>
   </figure>
 </article></li>
 
@@ -740,7 +1133,8 @@ sup {
   <p>
     <mark>led implementation of a grant-funded game to immerse second graders in concepts of economics in a visually engaging way.</mark>
     Recruited the team of student artists and developers, co-developed concept and provided technical leadership for implementation. met with second graders for feedback sessions and improvements. demoed iterations to stakeholders, and presented final deliverable.
-    <a class="more" href="https://accad.osu.edu/research-gallery/bakery-shop">more &raquo;</a>
+    <a class="more" href="#" data-html="lb-bakery-shop">more &plus;</a>
+    <a class="more" href="https://accad.osu.edu/research-gallery/bakery-shop">visit &raquo;</a>
   </p>
   <figure class="crop zoom">
     <img alt="screenshot of the Bakery Shop video game"
@@ -748,6 +1142,32 @@ sup {
          title="the Bakery Shop"
          src="grants/bakery/bakery-shop_3.webp">
     <a target="_blank" title="open source in new tab" href="grants/bakery/bakery-shop_3.webp"></a>
+    <div id="lb-bakery-shop" class="hide">
+      <a data-thumb="blank.png"
+         data-img="grants/bakery/bakery-shop_1.webp"
+         data-alt="title screen for the Bakery Shop"
+         data-width="896"
+         data-height="598"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="grants/bakery/bakery-shop_2.webp"
+         data-alt="instructions for the Bakery Shop"
+         data-width="897"
+         data-height="598"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="grants/bakery/bakery-shop_3.webp"
+         data-alt="preparing food for customers at the Bakery Shop"
+         data-width="898"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="grants/bakery/bakery-shop_4.webp"
+         data-alt="daily scoring screen for the Bakery Shop"
+         data-width="894"
+         data-height="596"
+      ></a>
+    </div>
   </figure>
 </article></li>
 
@@ -798,6 +1218,7 @@ sup {
   <p>
     <mark>developed a color exploration and inspiration tool for users to discover, create, and share palettes of Sherwin-Williams color.</mark>
     Architected and led development of the interactive microsite.
+    <a class="more" href="#" data-html="lb-sherwin-color-inspiration">more &plus;</a>
     <ul>
       <li>IAC outstanding interactive application 2009</li>
     </ul>
@@ -808,6 +1229,20 @@ sup {
          title="Sherwin-Williams: Color of Inspiration"
          src="ri/sherwin-williams_color-of-inspiration.webp">
     <a target="_blank" title="open source in new tab" href="ri/sherwin-williams_color-of-inspiration.webp"></a>
+    <div id="lb-sherwin-color-inspiration" class="hide">
+      <a data-thumb="blank.png"
+         data-img="ri/sherwin-williams_color-of-inspiration-view-palette.webp"
+         data-alt="starting screen for the Sherwin-Williams Color Visualizer Tool"
+         data-width="559"
+         data-height="430"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="ri/sherwin-williams_color-of-inspiration-add-palette.webp"
+         data-alt="painting an interior scene with the Sherwin-Williams Color Visualizer Tool"
+         data-width="559"
+         data-height="430"
+      ></a>
+    </div>
   </figure>
 </article></li>
 
@@ -819,6 +1254,7 @@ sup {
   <p>
     <mark>developed an online tool to allow users to virtually paint surfaces with Sherwin-Williams color.</mark>
     Led development of the online tool, including the imaging processes for selecting and painting on user-provided photos.
+    <a class="more" href="#" data-html="lb-sherwin-color-visualizer">more &plus;</a>
     <ul>
       <li>Adobe MAX award finalist 2008</li>
       <li>Communication Arts webpick 2009</li>
@@ -829,8 +1265,28 @@ sup {
     <img alt="screenshot of the Sherwin-Williams Color Visualizer Tool"
          loading="lazy"
          title="Sherwin-Williams: Color Visualizer Tool"
-         src="ri/sherwin-williams_color-visualizer_1.webp">
+         src="ri/sherwin-williams_color-visualizer_ext.webp">
     <a target="_blank" title="open source in new tab" href="ri/sherwin-williams_color-visualizer_1.webp"></a>
+    <div id="lb-sherwin-color-visualizer" class="hide">
+      <a data-thumb="blank.png"
+         data-img="ri/sherwin-williams_color-visualizer.webp"
+         data-alt="starting screen for the Sherwin-Williams Color Visualizer Tool"
+         data-width="968"
+         data-height="596"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="ri/sherwin-williams_color-visualizer_int.webp"
+         data-alt="painting an interior scene with the Sherwin-Williams Color Visualizer Tool"
+         data-width="800"
+         data-height="543"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="ri/sherwin-williams_color-visualizer_ext.webp"
+         data-alt="painting an exterior scene with the Sherwin-Williams Color Visualizer Tool"
+         data-width="970"
+         data-height="596"
+      ></a>
+    </div>
   </figure>
 </article></li>
 
@@ -908,7 +1364,7 @@ sup {
   <p>
     <mark>provided an example of the new JavaScript <code>&lt;canvas&gt;</code> element to do software 3D rendering using raycasting.</mark>
     Submitted demo to the Mozilla Developer Network (MDN) documentation site. it lived there until June 2022, when it became the <a href="https://github.com/mdn/museum/pull/1">first entry</a> in the MDN museum.
-    <a class="more" href="https://mdn.github.io/museum/canvas-raycaster">more &raquo;</a>
+    <a class="more" href="https://mdn.github.io/museum/canvas-raycaster">visit &raquo;</a>
     <!-- https://github.com/mdn/content/pull/17073#issuecomment-1150985732 -->
   </p>
   <figure class="crop">
@@ -928,6 +1384,7 @@ sup {
   <p>
     <mark>implemented application architecture and video games</mark>
     for an interactive CD-ROM that introduced growth hormone therapy to children and their parents through play.
+    <a class="more" href="#" data-html="lb-growth-city">more &plus;</a>
   </p>
   <figure class="crop zoom">
     <img alt="screenshot of an interactive map of Growth City"
@@ -935,6 +1392,152 @@ sup {
          title="Growth City"
          src="bd/growthcity/map.webp">
     <a target="_blank" title="open source in new tab" href="bd/growthcity/map.webp"></a>
+    <div id="lb-growth-city" class="hide">
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/transition.webp"
+         data-alt="transition animation between games and locations in Growth City"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/arcadia.webp"
+         data-alt="game selection panorama for the Arcadia location"
+         data-width="2139"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/arcadia-hungry-taxi-title.webp"
+         data-alt="title screen for Hungry Taxi"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/arcadia-hungry-taxi-level1.webp"
+         data-alt="first level of Hungry Taxi in Arcadia"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/arcadia-golf-title.webp"
+         data-alt="title screen for Arcadia Golf"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/arcadia-golf-hole1.webp"
+         data-alt="first level of Arcadia Golf"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/arcadia-pinball-title.webp"
+         data-alt="title screen for Human Pinball"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/arcadia-pinball-play.webp"
+         data-alt="playing Human Pinball in Arcadia"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/parkland.webp"
+         data-alt="game selection panorama for the Parkland location"
+         data-width="2139"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/parkland-hide-n-seek-title.webp"
+         data-alt="title screen for Hide-n-Seek"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/parkland-hide-n-seek-play.webp"
+         data-alt="playing Hide-n-Seek in Parkland"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/parkland-lets-paint-title.webp"
+         data-alt="title screen for Let's Paint"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/parkland-lets-paint-pic3.webp"
+         data-alt="playing Let's Paint in Parkland"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/parkland-hopscotch-title.webp"
+         data-alt="title screen for Memory Hopscotch"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/parkland-hopscotch-play.webp"
+         data-alt="playing Memory Hopscotch in Parkland"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/studio.webp"
+         data-alt="game selection panorama for the Studio Central location"
+         data-width="2139"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/studio-think-fast-title.webp"
+         data-alt="title screen for Think Fast"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/studio-think-fast-play.webp"
+         data-alt="playing Think Fast in Studio Central"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/studio-starmaker-title.webp"
+         data-alt="title screen for Starmaker"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/studio-starmaker-moves.webp"
+         data-alt="sequencing dance moves in Starmaker"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/studio-starmaker-music.webp"
+         data-alt="assembling beats in Starmaker"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/studio-starmaker-stage.webp"
+         data-alt="watching the performance in Starmaker"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/studio-snack-shack-title.webp"
+         data-alt="title screen for Snack Shack"
+         data-width="800"
+         data-height="600"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="bd/growthcity/studio-snack-shack-play.webp"
+         data-alt="playing Snack Shack in Studio Central"
+         data-width="800"
+         data-height="600"
+      ></a>
+    </div>
   </figure>
 </article></li>
 
@@ -1024,7 +1627,8 @@ sup {
   <p>
     <mark>developed re-usable game components in VRML and VRMLScript.</mark>
     Released as an open source library.
-    <a class="more" href="accad/thesis/BuildingGamesInVRML.pdf">more &raquo;</a>
+    <a class="more" href="#" data-html="lb-thesis">more &plus;</a>
+    <a class="more" href="accad/thesis/BuildingGamesInVRML.pdf">read &raquo;</a>
   </p>
   <p>
     cited in:<ul>
@@ -1039,6 +1643,20 @@ sup {
          title="Building Games in VRML"
          src="accad/thesis/p01.webp">
     <a target="_blank" title="open source in new tab" href="accad/thesis/p01.webp"></a>
+    <div id="lb-thesis" class="hide">
+      <a data-thumb="blank.png"
+         data-img="accad/thesis/p01.webp"
+         data-alt="first page of Building Games in VRML"
+         data-width="960"
+         data-height="1280"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="accad/thesis/protolib.webp"
+         data-alt="thumbnails of the examples showcasing behaviors and tools described in Building Games in VRML"
+         data-width="2035"
+         data-height="1180"
+      ></a>
+    </div>
   </figure>
 </article></li>
 
@@ -1051,7 +1669,8 @@ sup {
   <p>
     <mark>developed an interactive 3D application to teach fingerspelling.</mark>
     Programmed hand model manipulation in VRML and JavaScript to finger spell user input.
-    <a class="more" href="https://accad.osu.edu/research-gallery/fingerspelling-web-based-project">more &raquo;</a>
+    <a class="more" href="#" data-html="lb-finger-spelling">more &plus;</a>
+    <a class="more" href="https://accad.osu.edu/research-gallery/fingerspelling-web-based-project">visit &raquo;</a>
   </p>
   <figure class="crop zoom">
     <img alt="screenshot of a 3D finger spelling application"
@@ -1059,6 +1678,20 @@ sup {
          title="finger spelling tutor"
          src="accad/asl/finger-spelling.webp">
     <a target="_blank" title="open source in new tab" href="accad/asl/finger-spelling.webp"></a>
+    <div id="lb-finger-spelling" class="hide">
+      <a data-thumb="blank.png"
+         data-img="accad/asl/finger-spelling.webp"
+         data-alt="the fingerspelling application user interface"
+         data-width="677"
+         data-height="663"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="accad/asl/sample.webp"
+         data-alt="still images from a fingerspelling animation"
+         data-width="585"
+         data-height="582"
+      ></a>
+    </div>
   </figure>
 </article></li>
 
@@ -1070,7 +1703,7 @@ sup {
   <p>
     <mark>explored the underlying equirectangular projection grid of Escher's 1951 print with Apple's QTVR software.</mark>
     Only slight edits to the original were made in Photoshop to rotate 90&deg; and seamlessly tile horizontally.
-    <a class="more" href="oss/escher/">more &raquo;</a>
+    <a class="more" href="oss/escher/">view &raquo;</a>
   </p>
   <figure class="crop zoom">
     <img alt="M.C. Escher's House of Stairs rendered as a spherical panorama"
@@ -1125,6 +1758,7 @@ sup {
   <p>
     <mark>modeled and animated a 3D short, <em>Trouble in the Tub</em>.</mark>
     Rendered select still scenes as stereo pairs for 3D viewing.
+    <a class="more" href="#" data-html="lb-stereo-pair">more &plus;</a>
   </p>
   <figure class="crop">
     <img alt="stereo pair from Trouble in the Tub"
@@ -1132,6 +1766,26 @@ sup {
          title="Trouble in the Tub, stereo pair"
          src="accad/bathbot/stereo.webp">
     <a target="_blank" title="open source in new tab" href="accad/bathbot/stereo.webp"></a>
+    <div id="lb-stereo-pair" class="hide">
+      <a data-thumb="blank.png"
+         data-img="accad/bathbot/duckie.webp"
+         data-alt="Duckie, a character from Trouble in the Tub"
+         data-width="360"
+         data-height="360"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="accad/bathbot/tug.webp"
+         data-alt="Tug, a character from Trouble in the Tub"
+         data-width="360"
+         data-height="360"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="accad/bathbot/bathbot.webp"
+         data-alt="Bathbot, a character from Trouble in the Tub"
+         data-width="360"
+         data-height="360"
+      ></a>
+    </div>
   </figure>
 </article></li>
 
@@ -1143,18 +1797,192 @@ sup {
   <p>
     <mark>co-authored, -designed, and -produced a zine for the computer Graphics, Animation, and Multimedia (GAMMA) student interest group.</mark>
     Released eight issues over six months, coordinated with presentation topics for group meetings.
+    <a class="more" href="#" data-html="lb-gamma-zine">more &plus;</a>
   </p>
   <figure class="crop zoom">
-    <img alt="scanned image of the cover of issue 5"
+    <img alt="scanned image of the cover of issue 3"
          loading="lazy"
          title="GAMMA VOL 01 NO. 03"
-         src="gamma/vol01-no03.webp">
-    <a target="_blank" title="open source in new tab" href="gamma/vol01-no03.webp"></a>
+         src="gamma/gamma_vol01-no03-cover.jpg">
+    <a target="_blank" title="open source in new tab" href="gamma/gamma_vol01-no03-cover.jpg"></a>
+    <div id="lb-gamma-zine" class="hide">
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no01-cover.jpg"
+         data-alt="GAMMA VOL 01 NO. 01 cover"
+         data-width="2106"
+         data-height="1618"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no01-insideF.jpg"
+         data-alt="GAMMA VOL 01 NO. 01 inside front"
+         data-width="2106"
+         data-height="1618"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no01-insideB.jpg"
+         data-alt="GAMMA VOL 01 NO. 01 inside back"
+         data-width="2106"
+         data-height="1618"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no02-cover.jpg"
+         data-alt="GAMMA VOL 01 NO. 02 cover"
+         data-width="2106"
+         data-height="1618"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no02-insideF.jpg"
+         data-alt="GAMMA VOL 01 NO. 02 inside front"
+         data-width="2106"
+         data-height="1618"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no02-insideB.jpg"
+         data-alt="GAMMA VOL 01 NO. 02 inside back"
+         data-width="2106"
+         data-height="1618"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no03-cover.jpg"
+         data-alt="GAMMA VOL 01 NO. 03 cover"
+         data-width="2106"
+         data-height="1618"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no03-insideF.jpg"
+         data-alt="GAMMA VOL 01 NO. 03 inside front"
+         data-width="2106"
+         data-height="1618"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no03-insideB.jpg"
+         data-alt="GAMMA VOL 01 NO. 03 inside back"
+         data-width="2106"
+         data-height="1618"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no04-cover.jpg"
+         data-alt="GAMMA VOL 01 NO. 04 cover"
+         data-width="1640"
+         data-height="2445"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no04-p2+3.jpg"
+         data-alt="GAMMA VOL 01 NO. 04 interior pages 2 and 3"
+         data-width="2106"
+         data-height="1656"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no04-p4+5.jpg"
+         data-alt="GAMMA VOL 01 NO. 04 interior pages 4 and 5"
+         data-width="2106"
+         data-height="1656"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no05-cover.jpg"
+         data-alt="GAMMA VOL 01 NO. 05 cover"
+         data-width="2106"
+         data-height="1598"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no05-insideF.jpg"
+         data-alt="GAMMA VOL 01 NO. 05 inside front"
+         data-width="2106"
+         data-height="1598"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no05-insideB.jpg"
+         data-alt="GAMMA VOL 01 NO. 05 inside back"
+         data-width="2106"
+         data-height="1598"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no06-cover.jpg"
+         data-alt="GAMMA VOL 01 NO. 06 cover"
+         data-width="2132"
+         data-height="1688"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no06-insideF.jpg"
+         data-alt="GAMMA VOL 01 NO. 06 inside front"
+         data-width="2132"
+         data-height="1688"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no06-insideB.jpg"
+         data-alt="GAMMA VOL 01 NO. 06 inside back"
+         data-width="2174"
+         data-height="1688"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no07-cover.jpg"
+         data-alt="GAMMA VOL 01 NO. 07 cover"
+         data-width="2054"
+         data-height="1640"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no07-insideF.jpg"
+         data-alt="GAMMA VOL 01 NO. 07 inside front"
+         data-width="2054"
+         data-height="1640"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no07-insideB.jpg"
+         data-alt="GAMMA VOL 01 NO. 07 inside back"
+         data-width="2054"
+         data-height="1640"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no08-cover.jpg"
+         data-alt="GAMMA VOL 01 NO. 08 cover"
+         data-width="2114"
+         data-height="1632"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no08-insideF.jpg"
+         data-alt="GAMMA VOL 01 NO. 08 inside front"
+         data-width="2114"
+         data-height="1632"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/gamma_vol01-no08-insideB.jpg"
+         data-alt="GAMMA VOL 01 NO. 08 inside back"
+         data-width="2114"
+         data-height="1632"
+      ></a>
+      <a data-thumb="blank.png"
+         data-img="gamma/logo.webp"
+         data-alt="GAMMA logo"
+         data-caption="logotype for GAMMA, &copy; 1996 Peter Gerstmann"
+         data-width="750"
+         data-height="732"
+      ></a>
+    </div>
   </figure>
 </article></li>
 
 
 </ol>
+
+<script type="module">
+  // https://github.com/henrygd/bigger-picture
+  import BiggerPicture from './bigger-picture.mod.min.js'
+  function openGallery(e, imageLinks) {
+    e.preventDefault()
+    bp.open({
+      el: e.currentTarget,
+      items: imageLinks,
+    })
+  }
+  let bp = BiggerPicture({ target: document.body })
+  let galleryLinks = document.querySelectorAll('[data-html]')
+  for (let link of galleryLinks) {
+    link.addEventListener(
+      'click',
+      (e) => openGallery(e, document.querySelectorAll('#'+link.dataset.html+' > a'))
+    )
+  }
+</script>
 </body>
 
 </html>
